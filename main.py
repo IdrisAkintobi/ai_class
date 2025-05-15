@@ -2,6 +2,7 @@ from basics.markov_chain import complete_prompt
 from basics.cosine_similarity import get_similarity, similar_words
 from basics.naive_bayes_classification import get_sentiment
 from shared.print_header import print_header
+from spacy_utils import process_documents, compute_similarities
 
 
 # Test MarkovChain
@@ -30,3 +31,12 @@ print_header("Naive Bayes Classification Test")
 comments = ["100 percent", "I hate this", "This is lovely"]
 for comment in comments:
     print(f"The comment {comment} is {get_sentiment(comment)}")
+
+
+print_header("Texts similarity test using spacy")
+texts = [
+    "Apple is looking at buying U.K. startup for $1 billion",
+    "Microsoft is looking at buying NG startup for $4 billion",
+]
+doc1, doc2 = process_documents(texts)
+compute_similarities(doc1, doc2)
