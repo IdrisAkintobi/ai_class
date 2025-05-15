@@ -1,3 +1,3 @@
-# AI simple explanation
+# AI simplified
 
-Simple functions to explain the basics of AI
+A repository to explain the basics of AI (NLP)
