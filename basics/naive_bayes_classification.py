@@ -3,10 +3,23 @@ from string import punctuation
 from collections import Counter
 from collections import defaultdict
 
-with open("./data/comments_with_labels.pkl", "rb") as f:
-    post_comments_with_labels = pickle.load(f)
+post_comments_with_labels = [
+    ("I love this post.", "pos"),
+    ("This post is your best work.", "pos"),
+    ("I really liked this post.", "pos"),
+    ("I agree 100 percent. This is true", "pos"),
+    ("This post is spot on!", "pos"),
+    ("So smart!", "pos"),
+    ("What a good point!", "pos"),
+    ("Bad stuff.", "neg"),
+    ("I hate this.", "neg"),
+    ("This post is horrible.", "neg"),
+    ("I really disliked this post.", "neg"),
+    ("What a waste of time.", "neg"),
+    ("I do not agree with this post.", "neg"),
+    ("I can't believe you would post this.", "neg"),
+]
 
-print(post_comments_with_labels)
 
 class NaiveBayesClassifier:
     def __init__(self, samples):
@@ -21,7 +34,8 @@ class NaiveBayesClassifier:
     @staticmethod
     def tokenize(text):
         return (
-            text.lower().translate(str.maketrans("", "", punctuation + "1234567890"))
+            text.lower()
+            .translate(str.maketrans("", "", punctuation + "1234567890"))
             .replace("\n", " ")
             .split(" ")
         )
@@ -32,14 +46,14 @@ class NaiveBayesClassifier:
         neg = []
 
         for token in tokens:
-            pos.append(self.pos_counter[token]/ self.sample_count)
-            neg.append(self.neg_counter[token]/self.sample_count)
+            pos.append(self.pos_counter[token] / self.sample_count)
+            neg.append(self.neg_counter[token] / self.sample_count)
 
         total_pos = sum(pos)
         total_neg = sum(neg)
-        if(total_neg > total_pos):
+        if total_neg > total_pos:
             return "neg"
-        elif (total_neg < total_pos):
+        elif total_neg < total_pos:
             return "pos"
         return "neutral"
 
@@ -47,4 +61,3 @@ class NaiveBayesClassifier:
 def get_sentiment(text):
     cl = NaiveBayesClassifier(post_comments_with_labels)
     return cl.classify(text)
-

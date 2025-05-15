@@ -2,8 +2,9 @@ import random
 from string import punctuation
 from collections import defaultdict
 
-with open('./data/text.txt', 'r') as data:
+with open("./data/text.txt", "r") as data:
     data = data.read()
+
 
 class MarkovChain:
     def __init__(self):
@@ -35,9 +36,11 @@ class MarkovChain:
             output += " " + current  # Append the new word to the output
         return output  # Return the generated output string
 
+
 # Create class instance and train on the available data
 chain = MarkovChain()
 chain.train(data)
+
 
 # Provide a prompt that will be completed with the trained data
 def complete_prompt(prompt, length=10):
