@@ -1,4 +1,15 @@
 {
     "python.analysis.autoImportCompletions": true,
     "python.analysis.typeCheckingMode": "standard",
+    "cSpell.words": [
+        "contourf",
+        "crossentropy",
+        "edgecolor",
+        "figsize",
+        "kmeans",
+        "meshgrid",
+        "pairplot",
+        "xlabel",
+        "ylabel"
+    ],
 }
