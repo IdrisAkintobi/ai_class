@@ -6,6 +6,8 @@
         "crossentropy",
         "edgecolor",
         "figsize",
+        "huggingface",
+        "indecies",
         "kmeans",
         "meshgrid",
         "pairplot",
