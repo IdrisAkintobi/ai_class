@@ -1,0 +1,32 @@
+line-length = 100
+
+[lint]
+extend-select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # ruff-specific rules
+    "RUF",
+]
+fixable = ["ALL"]
+# unfixable = ["F401"]
+extend-ignore = [
+    "E501",   # line too long
+    "RUF001", # String contains ambiguous
+]
+
+
+[format]
+quote-style = "single"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 20

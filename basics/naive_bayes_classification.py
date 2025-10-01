@@ -1,43 +1,41 @@
-import pickle
+from collections import Counter, defaultdict
 from string import punctuation
-from collections import Counter
-from collections import defaultdict
 
 post_comments_with_labels = [
-    ("I love this post.", "pos"),
-    ("This post is your best work.", "pos"),
-    ("I really liked this post.", "pos"),
-    ("I agree 100 percent. This is true", "pos"),
-    ("This post is spot on!", "pos"),
-    ("So smart!", "pos"),
-    ("What a good point!", "pos"),
-    ("Bad stuff.", "neg"),
-    ("I hate this.", "neg"),
-    ("This post is horrible.", "neg"),
-    ("I really disliked this post.", "neg"),
-    ("What a waste of time.", "neg"),
-    ("I do not agree with this post.", "neg"),
-    ("I can't believe you would post this.", "neg"),
+    ('I love this post.', 'pos'),
+    ('This post is your best work.', 'pos'),
+    ('I really liked this post.', 'pos'),
+    ('I agree 100 percent. This is true', 'pos'),
+    ('This post is spot on!', 'pos'),
+    ('So smart!', 'pos'),
+    ('What a good point!', 'pos'),
+    ('Bad stuff.', 'neg'),
+    ('I hate this.', 'neg'),
+    ('This post is horrible.', 'neg'),
+    ('I really disliked this post.', 'neg'),
+    ('What a waste of time.', 'neg'),
+    ('I do not agree with this post.', 'neg'),
+    ("I can't believe you would post this.", 'neg'),
 ]
 
 
 class NaiveBayesClassifier:
     def __init__(self, samples):
-        self.mapping = {"pos": [], "neg": []}
+        self.mapping = {'pos': [], 'neg': []}
         self.neg_mapping = defaultdict(lambda: 0)
         self.sample_count = len(samples)
         for text, label in samples:
             self.mapping[label] += self.tokenize(text)
-        self.pos_counter = Counter(self.mapping["pos"])
-        self.neg_counter = Counter(self.mapping["neg"])
+        self.pos_counter = Counter(self.mapping['pos'])
+        self.neg_counter = Counter(self.mapping['neg'])
 
     @staticmethod
     def tokenize(text):
         return (
             text.lower()
-            .translate(str.maketrans("", "", punctuation + "1234567890"))
-            .replace("\n", " ")
-            .split(" ")
+            .translate(str.maketrans('', '', punctuation + '1234567890'))
+            .replace('\n', ' ')
+            .split(' ')
         )
 
     def classify(self, text):
@@ -52,10 +50,10 @@ class NaiveBayesClassifier:
         total_pos = sum(pos)
         total_neg = sum(neg)
         if total_neg > total_pos:
-            return "neg"
+            return 'neg'
         elif total_neg < total_pos:
-            return "pos"
-        return "neutral"
+            return 'pos'
+        return 'neutral'
 
 
 def get_sentiment(text):

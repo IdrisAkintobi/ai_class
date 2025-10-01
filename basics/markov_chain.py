@@ -1,8 +1,8 @@
 import random
-from string import punctuation
 from collections import defaultdict
+from string import punctuation
 
-with open("./data/text.txt", "r") as data:
+with open('./data/text.txt') as data:
     data = data.read()
 
 
@@ -12,9 +12,9 @@ class MarkovChain:
 
     def _tokenize(self, text):
         return (
-            text.translate(str.maketrans("", "", punctuation + "1234567890"))
-            .replace("\n", " ")
-            .split(" ")
+            text.translate(str.maketrans('', '', punctuation + '1234567890'))
+            .replace('\n', ' ')
+            .split(' ')
         )
 
     def train(self, text):
@@ -28,12 +28,12 @@ class MarkovChain:
         # get the last token from the prompt
         current = self._tokenize(prompt)[-1]  # Get the last word of the prompt
         output = prompt  # Start with the prompt as the output string
-        for i in range(length):
+        for _i in range(length):
             options = self.graph.get(current, [])  # Get possible next words
             if not options:  # If no options are available, skip
                 continue
             current = random.choice(options)  # Pick a random next word
-            output += " " + current  # Append the new word to the output
+            output += ' ' + current  # Append the new word to the output
         return output  # Return the generated output string
 
 
