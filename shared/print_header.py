@@ -1,4 +1,4 @@
-def print_header(title, width=50, char="="):
+def print_header(title, width=50, char='='):
     print()
     print(char * width)
     print(title.center(width))

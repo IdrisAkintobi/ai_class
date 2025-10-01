@@ -1,10 +1,10 @@
 import pickle
 
 try:
-    with open("./data/word_to_vector.pkl", "rb") as pk:
+    with open('./data/word_to_vector.pkl', 'rb') as pk:
         word_to_vector = pickle.load(pk)
 except FileNotFoundError:
-    print("Error: Could not find the word vector file. Please check the file path.")
+    print('Error: Could not find the word vector file. Please check the file path.')
     word_to_vector = {}
 
 
@@ -24,7 +24,7 @@ def cosine_similarity(vec_a, vec_b) -> float:
     """
     # Validate input dimensions
     if len(vec_a) != len(vec_b):
-        raise ValueError("Vectors must have the same dimensions")
+        raise ValueError('Vectors must have the same dimensions')
 
     # Calculate dot product
     numerator = sum([vec_a[i] * vec_b[i] for i in range(len(vec_a))])
@@ -40,7 +40,7 @@ def cosine_similarity(vec_a, vec_b) -> float:
     return numerator / (mag_a * mag_b)
 
 
-def similar_words(word="tree", top_k=10):
+def similar_words(word='tree', top_k=10):
     """
     Purpose: Given a word, finds the top top_k most similar words based on cosine similarity.
 
@@ -62,7 +62,7 @@ def similar_words(word="tree", top_k=10):
                 similarity = cosine_similarity(vector, word_to_vector[word])
                 similarities.append((candidate_word, similarity))
             except Exception as e:
-                print(f"Error computing similarity for {candidate_word}: {e}")
+                print(f'Error computing similarity for {candidate_word}: {e}')
 
     # Sort by similarity in descending order
     similarities.sort(key=lambda x: x[1], reverse=True)
